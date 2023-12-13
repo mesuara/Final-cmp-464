@@ -1,12 +1,18 @@
-// GifCard.js
+// CatCard.jsx
 import React from 'react';
 
-const CatCard = ({ gif }) => {
+const CatCard = ({ cat }) => {
   return (
-    <div className="card m-2" style={{ width: '18rem' }}>
-      <img src={gif.images.original.url} className="card-img-top" alt={gif.title} />
+    <div className="card">
+      <img src={cat.url} className="card-img-top" alt="Random Cat" />
       <div className="card-body">
-        <h5 className="card-title">{gif.title}</h5>
+        <h5 className="card-title">ID: {cat.id}</h5>
+        <p className="card-text">
+          <strong>Lifespan:</strong> {cat.lifespan || 'N/A'}
+        </p>
+        <p className="card-text">
+          <strong>Temperament:</strong> {cat.temperament || 'N/A'}
+        </p>
       </div>
     </div>
   );

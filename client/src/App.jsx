@@ -1,10 +1,16 @@
 // src/App.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
+import CatImageList from './components/CatImageList';
+import CatViewOption from './components/CatViewOption';
+import CatSearchForm from './components/CatSearchForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const App = () => {
   const [catCount, setCatCount] = useState(1);
   const [catImages, setCatImages] = useState([]);
+  const [view, setView] = useState('grid'); // 'list' or 'grid'
 
   const handleSearch = async () => {
     try {
@@ -21,25 +27,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>Random Cat Images</h1>
-      <div className="mb-3">
-        <label htmlFor="catCount">Number of Cat Images:</label>
-        <input
-          type="number"
-          id="catCount"
-          className="form-control"
-          value={catCount}
-          onChange={(e) => setCatCount(e.target.value)}
-        />
-      </div>
-      <button className="btn btn-success" onClick={handleSearch}>
-        Get Random Cats
-      </button>
-      <div className="mt-3">
-        {catImages.map((cat) => (
-          <img key={cat.id} src={cat.url} alt="Random Cat" style={{ width: '200px', margin: '5px' }} />
-        ))}
-      </div>
+      <h1 className="mt-3">Random Cat Images</h1>
+      <CatViewOption view={view} setView={setView} />
+      <CatSearchForm catCount={catCount} setCatCount={setCatCount} handleSearch={handleSearch} />
+      <CatImageList catImages={catImages} view={view} />
     </div>
   );
 };
