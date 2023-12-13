@@ -11,7 +11,7 @@ app.get('/api/random', async (req, res) => {
       'https://api.giphy.com/v1/gifs/random',
       {
         params: {
-          api_key: 'YOUR_GIPHY_API_KEY',
+          api_key: 'api key',
         },
       }
     );
