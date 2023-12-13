@@ -1,44 +1,45 @@
 // SearchSection.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import GifCard from './GifCard';
+import CatCard from './CatCard'; // Assuming you have a CatCard component
 
 const SearchSection = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [catCount, setCatCount] = useState(1);
+  const [catImages, setCatImages] = useState([]);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('/api/search', {
+      const response = await axios.get('/api/randomCats', {
         params: {
-          query: searchQuery,
+          count: catCount,
         },
       });
-      setSearchResults(response.data.data);
+      setCatImages(response.data);
+      console.log(response)
     } catch (error) {
-      console.error('Error searching for GIFs:', error.message);
+      console.error('Error fetching random cat images:', error.message);
     }
   };
 
   return (
     <div>
-      <h1>Search GIFs</h1>
+      <h1>Random Cat Images</h1>
       <div className="mb-3">
+        <label htmlFor="catCount">Number of Cat Images:</label>
         <input
-          type="text"
+          type="number"
+          id="catCount"
           className="form-control"
-          placeholder="Enter search query"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={catCount}
+          onChange={(e) => setCatCount(e.target.value)}
         />
       </div>
       <button className="btn btn-success" onClick={handleSearch}>
-        Search
+        Get Random Cats
       </button>
       <div className="mt-3">
-        {/* Use optional chaining to handle potential undefined searchResults */}
-        {searchResults?.map((gif) => (
-          <GifCard key={gif.id} gif={gif} />
+        {catImages.map((cat) => (
+          <CatCard key={cat.id} cat={cat} />
         ))}
       </div>
     </div>

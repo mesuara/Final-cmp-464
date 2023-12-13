@@ -1,7 +1,7 @@
 // GifCard.js
 import React from 'react';
 
-const GifCard = ({ gif }) => {
+const CatCard = ({ gif }) => {
   return (
     <div className="card m-2" style={{ width: '18rem' }}>
       <img src={gif.images.original.url} className="card-img-top" alt={gif.title} />
@@ -12,4 +12,4 @@ const GifCard = ({ gif }) => {
   );
 };
 
-export default GifCard;
+export default CatCard;

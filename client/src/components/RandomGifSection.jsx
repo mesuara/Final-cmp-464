@@ -1,7 +1,7 @@
 // RandomGifSection.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GifCard from './GifCard';
+import GifCard from './CatCard';
 
 const RandomGifSection = () => {
   const [randomGif, setRandomGif] = useState(null);

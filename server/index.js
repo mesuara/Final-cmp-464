@@ -1,49 +1,26 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
+
 const app = express();
-// const PORT = process.env.PORT || 3000;
-const PORT = 3000;
-app.use(express.json());
-const apiKey = 'kHX2QuNIC3tjRUl1D4HFVSMsUs1r00DA'
-app.get('/api/random', async (req, res) => {
-  try {
-    const response = await axios.get(
-      'https://api.giphy.com/v1/gifs/random',
-      {
-        params: {
-          api_key: apiKey,
-        },
-      }
-    );
-    res.json(response.data);
-    console.log("inside index.js",response.data)
-  } catch (error) {
-    console.error('Error fetching random GIF:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+const PORT = process.env.PORT || 5000;
 
-app.get('/api/search', async (req, res) => {
-  const { query } = req.query;
+// Enable CORS for all routes
+app.use(cors());
 
-  if (!query) {
-    return res.status(400).json({ error: 'Search query is required.' });
-  }
+// API endpoint for fetching random cat images
+app.get('/api/randomCats', async (req, res) => {
+  const { count } = req.query;
 
   try {
-    const response = await axios.get(
-      'https://api.giphy.com/v1/gifs/search',
-      {
-        params: {
-          api_key: apiKey,
-          q: query,
-        },
-      }
-    );
+    const response = await axios.get(`https://api.thecatapi.com/v1/images/search`, {
+      params: {
+        limit: count || 1,
+      },
+    });
     res.json(response.data);
-    console.log("inside index.js",response.data)
   } catch (error) {
-    console.error('Error searching for GIFs:', error.message);
+    console.error('Error fetching random cat images:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
