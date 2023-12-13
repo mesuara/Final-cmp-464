@@ -1,4 +1,4 @@
-// SearchSection.js
+// SearchSection.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import GifCard from './GifCard';
@@ -36,7 +36,8 @@ const SearchSection = () => {
         Search
       </button>
       <div className="mt-3">
-        {searchResults.map((gif) => (
+        {/* Use optional chaining to handle potential undefined searchResults */}
+        {searchResults?.map((gif) => (
           <GifCard key={gif.id} gif={gif} />
         ))}
       </div>

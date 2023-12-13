@@ -13,6 +13,7 @@ const RandomGifSection = () => {
   const fetchRandomGif = async () => {
     try {
       const response = await axios.get('/api/random');
+      console.log(response)
       setRandomGif(response.data.data);
     } catch (error) {
       console.error('Error fetching random GIF:', error.message);
