@@ -1,18 +1,17 @@
-// CatCard.jsx
+// src/components/CatCard.jsx
 import React from 'react';
 
-const CatCard = ({ cat }) => {
+const CatCard = ({ animal }) => {
+  if (!animal || !animal.imageUrl) {
+    return null;
+  }
+
   return (
     <div className="card">
-      <img src={cat.url} className="card-img-top" alt="Random Cat" />
+      <img src={animal.imageUrl} className="card-img-top" alt="Cat" />
       <div className="card-body">
-        <h5 className="card-title">ID: {cat.id}</h5>
-        <p className="card-text">
-          <strong>Lifespan:</strong> {cat.lifespan || 'N/A'}
-        </p>
-        <p className="card-text">
-          <strong>Temperament:</strong> {cat.temperament || 'N/A'}
-        </p>
+        <h5 className="card-title"> Details</h5>
+        {/* Add more details if needed */}
       </div>
     </div>
   );
